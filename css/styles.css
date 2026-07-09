@@ -95,7 +95,7 @@ main { padding: 24px 0 48px; }
 .asset-item button, .site-item button, .zone-item button { width: 100%; background: transparent; border: 0; border-radius: 12px; padding: 0; text-align: left; cursor: pointer; }
 .asset-item .meta, .site-item .meta, .zone-item .meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .asset-item .title { font-weight: 700; }
-.bar-track { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; margin-top: 8px; }
+.bar-track { height: 8px; border-radius: var(--radius-pill); background: var(--line); overflow: hidden; margin-top: 8px; }
 .bar-fill { height: 100%; border-radius: inherit; }
 .status-chip[data-status="operating"], .status-chip[data-status="ok"], .status-chip[data-status="on schedule"], .status-chip[data-status="good"] { background: var(--green-tint); color: var(--green); }
 .status-chip[data-status="idle"], .status-chip[data-status="warn"], .status-chip[data-status="due soon"], .status-chip[data-status="watch"] { background: var(--yellow-tint); color: var(--ink); }
