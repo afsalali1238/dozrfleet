@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dozr Fleet — Fleet Map</title>
+  <meta name="description" content="Dozr Fleet operations dashboard for asset tracking and fleet health.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body data-page="fleet-map">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <h1 class="sr-only">Dozr Fleet — Fleet Map</h1>
+  <header class="site-nav">
+    <div class="container">
+      <a class="logo" href="index.html" aria-label="Dozr Fleet home">
+        <span class="logo-mark">D</span>
+        <span>dozr fleet</span>
+      </a>
+      <nav class="links" aria-label="Primary">
+        <a href="index.html" aria-current="page">Fleet Map</a>
+        <a href="fuel.html">Fuel</a>
+        <a href="maintenance.html">Maintenance</a>
+        <a href="geofences.html">Geofences</a>
+        <a href="utilisation.html">Utilisation</a>
+        <a href="cost-roi.html">Cost &amp; ROI</a>
+        <a href="reports.html">Reports</a>
+      </nav>
+      <div class="nav-actions">
+        <label class="search-field" for="fleet-search">
+          <span class="eyebrow">Search</span>
+          <input id="fleet-search" type="search" placeholder="Search assets">
+        </label>
+        <span class="live-pill" data-live-status>Live sync</span>
+        <span class="alert-badge" data-alert-count>2 alerts</span>
+        <button class="btn btn-primary" type="button">+ Add Asset</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="container page-shell">
+      <div class="sidebar-layout">
+        <aside class="panel" aria-label="Fleet asset list">
+          <div class="panel-header">
+            <div>
+              <h2>Fleet</h2>
+              <p class="text-muted">8 assets</p>
+            </div>
+            <button class="btn btn-secondary" type="button">+ Add</button>
+          </div>
+          <div class="panel-body">
+            <div class="asset-list" id="asset-list"></div>
+            <div class="panel" style="margin-top:16px;">
+              <div class="panel-header">
+                <h3>Sites</h3>
+              </div>
+              <div class="panel-body">
+                <div class="site-list" id="site-list"></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="page-shell">
+          <section class="stats-grid" id="summary-strip" aria-label="Fleet summary"></section>
+
+          <section class="panel map-card" aria-label="Fleet map view">
+            <div class="map-surface" role="img" aria-label="Static fleet map with asset positions">
+              <svg viewBox="0 0 640 480" aria-hidden="true">
+                <rect x="0" y="0" width="640" height="480" fill="rgba(255,255,255,0.35)"></rect>
+                <path d="M65 90 C130 70, 205 90, 252 142 S342 208, 366 190 S470 136, 570 178" fill="none" stroke="var(--line)" stroke-width="22" stroke-linecap="round"></path>
+                <path d="M134 276 C196 244, 248 182, 308 216 S435 332, 489 306" fill="none" stroke="var(--line)" stroke-width="22" stroke-linecap="round"></path>
+              </svg>
+              <div class="map-control">
+                <button type="button">Map</button>
+                <button type="button">Satellite</button>
+                <button type="button">+ Geofence</button>
+                <button type="button">Route Replay</button>
+              </div>
+              <div id="map-markers" class="map-markers" aria-label="Asset markers"></div>
+            </div>
+            <aside class="panel detail-card" aria-labelledby="asset-detail-heading">
+              <div class="panel-header">
+                <div>
+                  <h3 id="asset-detail-heading">Selected asset</h3>
+                  <p class="text-muted" data-last-updated>Updated 09 Jul 2026</p>
+                </div>
+              </div>
+              <div id="asset-detail"></div>
+            </aside>
+          </section>
+
+          <section class="panel" aria-labelledby="alerts-heading">
+            <div class="panel-header">
+              <h3 id="alerts-heading">Live alerts</h3>
+              <span class="status-chip" data-status="critical">Live</span>
+            </div>
+            <div class="panel-body">
+              <div class="tab-row" role="tablist" aria-label="Alert feeds">
+                <button type="button" role="tab" aria-selected="true">Active Alerts</button>
+                <button type="button" role="tab" aria-selected="false">Event Log</button>
+                <button type="button" role="tab" aria-selected="false">Fuel Events</button>
+              </div>
+              <div class="alert-feed" id="alert-feed" aria-live="polite"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="data/fleet.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

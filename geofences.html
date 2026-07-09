@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dozr Fleet — Geofences</title>
+  <meta name="description" content="Dozr Fleet geofence management and event tracking.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body data-page="geofences">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <h1 class="sr-only">Dozr Fleet — Geofences</h1>
+  <header class="site-nav">
+    <div class="container">
+      <a class="logo" href="index.html" aria-label="Dozr Fleet home">
+        <span class="logo-mark">D</span>
+        <span>dozr fleet</span>
+      </a>
+      <nav class="links" aria-label="Primary">
+        <a href="index.html">Fleet Map</a>
+        <a href="fuel.html">Fuel</a>
+        <a href="maintenance.html">Maintenance</a>
+        <a href="geofences.html" aria-current="page">Geofences</a>
+        <a href="utilisation.html">Utilisation</a>
+        <a href="cost-roi.html">Cost &amp; ROI</a>
+        <a href="reports.html">Reports</a>
+      </nav>
+      <div class="nav-actions">
+        <label class="search-field" for="fleet-search">
+          <span class="eyebrow">Search</span>
+          <input id="fleet-search" type="search" placeholder="Search assets">
+        </label>
+        <span class="live-pill" data-live-status>Live sync</span>
+        <span class="alert-badge" data-alert-count>2 alerts</span>
+        <button class="btn btn-primary" type="button">+ Add Asset</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="container page-shell">
+      <section class="summary-grid" id="summary-strip" aria-label="Geofence summary"></section>
+      <section class="panel" aria-labelledby="manager-heading">
+        <div class="panel-header">
+          <h2 id="manager-heading">Geofence Manager</h2>
+          <div class="nav-actions">
+            <button class="btn btn-secondary" type="button">+ New Zone</button>
+            <button class="btn btn-secondary" type="button">Polygon</button>
+            <button class="btn btn-secondary" type="button">Circle</button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="map-card">
+            <div class="map-surface" id="geofence-map" role="img" aria-label="Static map showing geofence zones"></div>
+            <div class="panel">
+              <div class="panel-header">
+                <h3>Zones</h3>
+              </div>
+              <div class="panel-body">
+                <div class="zone-list" id="zone-list"></div>
+                <div class="panel" style="margin-top:16px;">
+                  <div class="panel-header">
+                    <h3>Recent Events</h3>
+                  </div>
+                  <div class="panel-body">
+                    <div class="timeline" id="event-feed"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="data/fleet.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dozr Fleet — Reports</title>
+  <meta name="description" content="Dozr Fleet report library and recent report delivery history.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body data-page="reports">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <h1 class="sr-only">Dozr Fleet — Reports</h1>
+  <header class="site-nav">
+    <div class="container">
+      <a class="logo" href="index.html" aria-label="Dozr Fleet home">
+        <span class="logo-mark">D</span>
+        <span>dozr fleet</span>
+      </a>
+      <nav class="links" aria-label="Primary">
+        <a href="index.html">Fleet Map</a>
+        <a href="fuel.html">Fuel</a>
+        <a href="maintenance.html">Maintenance</a>
+        <a href="geofences.html">Geofences</a>
+        <a href="utilisation.html">Utilisation</a>
+        <a href="cost-roi.html">Cost &amp; ROI</a>
+        <a href="reports.html" aria-current="page">Reports</a>
+      </nav>
+      <div class="nav-actions">
+        <label class="search-field" for="fleet-search">
+          <span class="eyebrow">Search</span>
+          <input id="fleet-search" type="search" placeholder="Search assets">
+        </label>
+        <span class="live-pill" data-live-status>Live sync</span>
+        <span class="alert-badge" data-alert-count>2 alerts</span>
+        <button class="btn btn-primary" type="button">+ Add Asset</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="container page-shell">
+      <section class="summary-grid" id="summary-strip" aria-label="Reports summary"></section>
+      <section class="panel" aria-labelledby="available-heading">
+        <div class="panel-header">
+          <h2 id="available-heading">Available Reports</h2>
+        </div>
+        <div class="panel-body">
+          <div class="report-grid" id="report-grid"></div>
+        </div>
+      </section>
+      <section class="panel" aria-labelledby="recent-heading">
+        <div class="panel-header">
+          <h2 id="recent-heading">Recently Generated</h2>
+        </div>
+        <div class="panel-body table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Report</th>
+                <th scope="col">Period</th>
+                <th scope="col">Assets</th>
+                <th scope="col">Generated</th>
+                <th scope="col">Delivery</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="recent-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="data/fleet.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
