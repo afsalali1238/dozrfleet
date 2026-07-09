@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dozr Fleet — Fuel</title>
-  <meta name="description" content="Dozr Fleet fuel monitoring view for consumption and tank levels.">
+  <title>Dozr Fleet — Alerts Center</title>
+  <meta name="description" content="Dozr Fleet alerts center for monitoring system, vehicle, and operational alerts.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
-<body data-page="fuel">
+<body data-page="alerts">
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <h1 class="sr-only">Dozr Fleet — Fuel</h1>
+  <h1 class="sr-only">Dozr Fleet — Alerts Center</h1>
   <header class="site-nav">
     <div class="container">
       <a class="logo" href="index.html" aria-label="Dozr Fleet home">
@@ -22,13 +22,13 @@
       </a>
       <nav class="links" aria-label="Primary" data-nav-menu data-open="false">
         <a href="index.html">Fleet Map</a>
-        <a href="fuel.html" aria-current="page">Fuel</a>
+        <a href="fuel.html">Fuel</a>
         <a href="maintenance.html">Maintenance</a>
         <a href="geofences.html">Geofences</a>
         <a href="utilisation.html">Utilisation</a>
         <a href="trip-history.html">Trip History</a>
         <a href="timesheet.html">Timesheet</a>
-        <a href="alerts.html">Alerts Center</a>
+        <a href="alerts.html" aria-current="page">Alerts Center</a>
         <a href="cost-roi.html">Cost &amp; ROI</a>
         <a href="reports.html">Reports</a>
       </nav>
@@ -50,16 +50,41 @@
 
   <main id="main-content">
     <section class="container page-shell">
-      <section class="summary-grid" id="summary-strip" aria-label="Fuel summary"></section>
-      <section class="panel" aria-labelledby="fuel-heading">
-        <div class="panel-header">
-          <h2 id="fuel-heading">Fuel overview</h2>
-          <span class="status-chip" data-status="ok">Live</span>
+      <div class="sidebar-layout">
+        <div class="page-shell">
+          <section class="panel" aria-labelledby="alerts-heading">
+            <div class="panel-header">
+              <h2 id="alerts-heading">Alerts Center</h2>
+              <span class="status-chip" data-status="critical">Live Feed</span>
+            </div>
+            <div class="panel-body">
+              <div class="tab-row" role="tablist" aria-label="Alert feeds">
+                <button type="button" role="tab" aria-selected="true">All Alerts</button>
+                <button type="button" role="tab" aria-selected="false">Critical</button>
+                <button type="button" role="tab" aria-selected="false">Warnings</button>
+                <button type="button" role="tab" aria-selected="false">System</button>
+              </div>
+              <div class="alert-feed" id="alerts-center-feed" aria-live="polite"></div>
+            </div>
+          </section>
         </div>
-        <div class="panel-body">
-          <div class="fuel-card-grid" id="fuel-cards"></div>
-        </div>
-      </section>
+        
+        <aside class="panel">
+          <div class="panel-header">
+            <h3>Routing Rules</h3>
+          </div>
+          <div class="panel-body">
+            <div class="note-block">
+              <p><strong>Out-of-hours Geofence</strong></p>
+              <p class="text-muted" style="margin-top: 4px; font-size: 13px;">Assets exiting designated zones between 18:00 and 06:00 will trigger a critical alert.</p>
+            </div>
+            <div class="note-block" style="margin-top: 16px;">
+              <p><strong>WhatsApp Routing</strong></p>
+              <p class="text-muted" style="margin-top: 4px; font-size: 13px;">Critical alerts are automatically routed to the active Site Manager's WhatsApp number. Info and Warning alerts are email-only.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
     </section>
   </main>
 
@@ -67,4 +92,3 @@
   <script src="js/main.js" defer></script>
 </body>
 </html>
-

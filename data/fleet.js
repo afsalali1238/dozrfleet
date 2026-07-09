@@ -36,10 +36,28 @@ window.DOZR_FLEET = {
       engineLoad: 55,
       maintenanceDue: 1,
       maintenanceStatus: "Due soon",
+      can: { coolantTemp: 88, oilPressure: 380 },
       utilisation: { working: 6.2, idle: 1.4, off: 0.4, trend: [62, 68, 71, 74, 78, 76, 81] },
       cost: { total: 14280, fuelSaved: 3120, idleReduction: 640, breakdownsAvoided: 980 },
       alerts: [
         { severity: "warning", code: "P20E0", description: "Diesel particulate filter pressure high" }
+      ],
+      trips: [
+        {
+          date: "09 Jul 2026",
+          distance: "14.2 km",
+          startTime: "06:30",
+          endTime: "14:15",
+          stops: [
+            { time: "09:00", duration: "15m", location: "Site Office" },
+            { time: "12:30", duration: "45m", location: "Refueling Station" }
+          ],
+          events: [
+            { time: "07:15", type: "Idling", detail: "Exceeded 10m idle limit" },
+            { time: "11:45", type: "Geofence", detail: "Entered restricted zone" }
+          ],
+          route: [{ x: 20, y: 20 }, { x: 21, y: 22 }, { x: 22, y: 24 }]
+        }
       ]
     },
     {
@@ -61,10 +79,26 @@ window.DOZR_FLEET = {
       engineLoad: 24,
       maintenanceDue: 2,
       maintenanceStatus: "Overdue",
+      can: { coolantTemp: 92, oilPressure: 320 },
       utilisation: { working: 4.1, idle: 2.3, off: 1.6, trend: [48, 45, 42, 38, 41, 44, 39] },
       cost: { total: 9860, fuelSaved: 1840, idleReduction: 420, breakdownsAvoided: 540 },
       alerts: [
         { severity: "critical", code: "P018C", description: "Fuel pressure low" }
+      ],
+      trips: [
+        {
+          date: "09 Jul 2026",
+          distance: "8.5 km",
+          startTime: "07:00",
+          endTime: "11:30",
+          stops: [
+            { time: "10:15", duration: "20m", location: "Material Depot" }
+          ],
+          events: [
+            { time: "08:30", type: "Harsh Braking", detail: "Deceleration > 12km/h/s" }
+          ],
+          route: [{ x: 35, y: 40 }, { x: 37, y: 41 }, { x: 38, y: 42 }]
+        }
       ]
     },
     {
@@ -86,9 +120,11 @@ window.DOZR_FLEET = {
       engineLoad: 71,
       maintenanceDue: 0,
       maintenanceStatus: "On schedule",
+      can: { coolantTemp: 84, oilPressure: 410 },
       utilisation: { working: 7.1, idle: 0.9, off: 0.2, trend: [72, 74, 79, 82, 83, 81, 84] },
       cost: { total: 17520, fuelSaved: 4210, idleReduction: 910, breakdownsAvoided: 1280 },
-      alerts: []
+      alerts: [],
+      trips: []
     },
     {
       id: "KSP-004",
@@ -109,9 +145,25 @@ window.DOZR_FLEET = {
       engineLoad: 48,
       maintenanceDue: 1,
       maintenanceStatus: "Due soon",
+      can: { coolantTemp: 89, oilPressure: 440 },
       utilisation: { working: 5.4, idle: 1.8, off: 1.0, trend: [54, 58, 61, 57, 60, 63, 59] },
       cost: { total: 11820, fuelSaved: 2460, idleReduction: 520, breakdownsAvoided: 760 },
-      alerts: []
+      alerts: [],
+      trips: [
+        {
+          date: "09 Jul 2026",
+          distance: "142.3 km",
+          startTime: "05:00",
+          endTime: "13:45",
+          stops: [
+            { time: "08:45", duration: "30m", location: "Rest Area" }
+          ],
+          events: [
+            { time: "06:20", type: "Overspeed", detail: "Speed > 90km/h" }
+          ],
+          route: [{ x: 70, y: 40 }, { x: 72, y: 42 }, { x: 74, y: 44 }]
+        }
+      ]
     },
     {
       id: "KSP-005",
@@ -132,11 +184,13 @@ window.DOZR_FLEET = {
       engineLoad: 0,
       maintenanceDue: 3,
       maintenanceStatus: "Overdue",
+      can: { coolantTemp: 60, oilPressure: 0 },
       utilisation: { working: 2.6, idle: 0.8, off: 4.4, trend: [31, 34, 29, 28, 26, 24, 22] },
       cost: { total: 15460, fuelSaved: 1920, idleReduction: 360, breakdownsAvoided: 640 },
       alerts: [
         { severity: "critical", code: "U0101", description: "Lost communication with transmission control module" }
-      ]
+      ],
+      trips: []
     },
     {
       id: "KSP-006",
@@ -157,9 +211,11 @@ window.DOZR_FLEET = {
       engineLoad: 62,
       maintenanceDue: 0,
       maintenanceStatus: "On schedule",
+      can: { coolantTemp: 86, oilPressure: 390 },
       utilisation: { working: 6.7, idle: 1.1, off: 0.3, trend: [64, 67, 69, 71, 72, 74, 77] },
       cost: { total: 16880, fuelSaved: 3860, idleReduction: 780, breakdownsAvoided: 1120 },
-      alerts: []
+      alerts: [],
+      trips: []
     },
     {
       id: "KSP-007",
@@ -180,9 +236,11 @@ window.DOZR_FLEET = {
       engineLoad: 51,
       maintenanceDue: 1,
       maintenanceStatus: "Due soon",
+      can: { coolantTemp: 85, oilPressure: 395 },
       utilisation: { working: 5.8, idle: 1.1, off: 0.6, trend: [76, 80, 82, 81, 79, 74, 78] },
       cost: { total: 12190, fuelSaved: 2760, idleReduction: 460, breakdownsAvoided: 920 },
-      alerts: []
+      alerts: [],
+      trips: []
     },
     {
       id: "KSP-008",
@@ -190,7 +248,7 @@ window.DOZR_FLEET = {
       type: "Excavator",
       category: "Excavator",
       site: "Al Quoz Industrial Area",
-      mapPosition: { x: 46, y: 26 },
+      mapPosition: { x: 28, y: 58 },
       status: "Idle",
       health: "Watch",
       fuelLevel: 44,
@@ -203,11 +261,13 @@ window.DOZR_FLEET = {
       engineLoad: 28,
       maintenanceDue: 2,
       maintenanceStatus: "Overdue",
+      can: { coolantTemp: 88, oilPressure: 330 },
       utilisation: { working: 3.4, idle: 2.8, off: 1.2, trend: [44, 46, 48, 47, 43, 38, 41] },
       cost: { total: 10240, fuelSaved: 1640, idleReduction: 340, breakdownsAvoided: 580 },
       alerts: [
         { severity: "warning", code: "P0642", description: "Sensor reference voltage low" }
-      ]
+      ],
+      trips: []
     }
   ],
   geofences: [
@@ -265,6 +325,10 @@ window.DOZR_FLEET = {
       dueHours: 2800,
       currentHours: 2644,
       remainingHours: 156,
+      lastKm: 120000,
+      dueKm: 150000,
+      currentKm: 146500,
+      remainingKm: 3500,
       status: "Due soon"
     }
   ],
@@ -280,5 +344,20 @@ window.DOZR_FLEET = {
     { report: "Fuel Consumption", period: "09 Jul 2026", assets: 8, generated: "14:30", delivery: ["Email", "WhatsApp"] },
     { report: "Maintenance Schedule", period: "08 Jul 2026", assets: 6, generated: "09:10", delivery: ["Email"] },
     { report: "Client Site Report", period: "08 Jul 2026", assets: 4, generated: "07:45", delivery: ["Email", "WhatsApp"] }
+  ],
+  alertsFeed: [
+    { time: "14:15", assetId: "KSP-002", assetName: "JCB 3CX Backhoe", severity: "critical", code: "P018C", description: "Fuel pressure low" },
+    { time: "13:42", assetId: "KSP-005", assetName: "Liebherr LTM 1060 Crane", severity: "critical", code: "U0101", description: "Lost communication with transmission control module" },
+    { time: "12:30", assetId: "KSP-001", assetName: "CAT 320 Excavator", severity: "warning", code: "P20E0", description: "Diesel particulate filter pressure high" },
+    { time: "11:15", assetId: "KSP-008", assetName: "XCMG XE215C Excavator", severity: "warning", code: "P0642", description: "Sensor reference voltage low" },
+    { time: "09:45", assetId: "KSP-004", assetName: "MAN TGX 18.500 Truck", severity: "info", code: "SYS-01", description: "Device reconnected to cellular network" },
+    { time: "08:10", assetId: "KSP-003", assetName: "Komatsu WA320 Loader", severity: "ok", code: "SYS-00", description: "Firmware update successfully applied" }
+  ],
+  drivers: [
+    { driverName: "Ahmed Al Mansoori", assetId: "KSP-001", shiftStart: "06:00", shiftEnd: "15:00", movingHours: 6.2, idleHours: 1.4, stoppedHours: 1.4 },
+    { driverName: "Rajat Sharma", assetId: "KSP-004", shiftStart: "05:00", shiftEnd: "17:00", movingHours: 8.4, idleHours: 1.8, stoppedHours: 1.8 },
+    { driverName: "Tariq Mahmood", assetId: "KSP-007", shiftStart: "07:00", shiftEnd: "16:00", movingHours: 5.8, idleHours: 1.1, stoppedHours: 2.1 },
+    { driverName: "Kevin O'Connor", assetId: "KSP-006", shiftStart: "06:30", shiftEnd: "16:30", movingHours: 6.7, idleHours: 1.1, stoppedHours: 2.2 },
+    { driverName: "Saifullah Khan", assetId: "KSP-002", shiftStart: "07:00", shiftEnd: "14:00", movingHours: 4.1, idleHours: 2.3, stoppedHours: 0.6 }
   ]
 };
