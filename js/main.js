@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const page = document.body.dataset.page;
 
   initMobileNav();
+  renderTripHistory(fleet);
   renderNavStatus(fleet);
   
   if (page === "fleet-map") renderFleetMap(fleet);
@@ -14,8 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (page === "reports") renderReports(fleet);
   if (page === "alerts") renderAlertsCenter(fleet);
   if (page === "timesheet") renderTimesheet(fleet);
-  if (page === "trip-history") renderTripHistory(fleet);
-});
+  });
 
 function initMobileNav() {
   const toggle = document.querySelector("[data-nav-toggle]");
@@ -733,6 +733,16 @@ function renderTripHistory(fleet) {
   };
 
   select.addEventListener("change", loadTrip);
+
+  const replayBtn = Array.from(document.querySelectorAll(".map-control button")).find(b => b.textContent.includes("Route Replay"));
+  const modal = document.getElementById("trip-history-modal");
+  if (replayBtn && modal) {
+    replayBtn.addEventListener("click", () => {
+      modal.showModal();
+      loadTrip();
+    });
+  }
+
   loadTrip();
 
   // Basic scrubber logic
