@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const fleet = window.DOZR_FLEET || { assets: [], sites: [], geofences: [], events: [], maintenance: [], reports: [], recentReports: [] };
   const page = document.body.dataset.page;
 
+  initMobileNav();
   renderNavStatus(fleet);
   if (page === "fleet-map") renderFleetMap(fleet);
   if (page === "fuel") renderFuel(fleet);
@@ -11,6 +12,43 @@ document.addEventListener("DOMContentLoaded", () => {
   if (page === "cost-roi") renderCostRoi(fleet);
   if (page === "reports") renderReports(fleet);
 });
+
+/**
+ * Collapses the primary nav links behind a hamburger toggle below 1150px.
+ * Mirrors marketplace/js/main.js's initMobileNav so both products share the
+ * same interaction pattern. Search/status/Add Asset stay visible outside
+ * the collapsed menu, same as marketplace keeps its sign-in button outside.
+ */
+function initMobileNav() {
+  const toggle = document.querySelector("[data-nav-toggle]");
+  const menu = document.querySelector("[data-nav-menu]");
+  if (!toggle || !menu) return;
+
+  function closeMenu() {
+    menu.setAttribute("data-open", "false");
+    toggle.setAttribute("aria-expanded", "false");
+  }
+
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = menu.getAttribute("data-open") === "true";
+    menu.setAttribute("data-open", String(!isOpen));
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+  });
+
+  document.addEventListener("click", (e) => {
+    if (menu.getAttribute("data-open") === "true" && !menu.contains(e.target) && e.target !== toggle) {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menu.getAttribute("data-open") === "true") {
+      closeMenu();
+      toggle.focus();
+    }
+  });
+}
 
 function renderNavStatus(fleet) {
   const live = document.querySelector("[data-live-status]");
