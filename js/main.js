@@ -417,12 +417,12 @@ function renderGeofences(fleet) {
         const color = colors[index] || zone.color;
         if (zone.shape === 'Polygon') {
           const points = index === 0 ? '120,95 200,70 250,120 220,180 130,175' : '330,120 430,90 485,140 420,210 320,190';
-          return \`<g><polygon points="\${points}" fill="\${color}" fill-opacity="0.24" stroke="\${color}" stroke-width="3"></polygon><text x="\${index === 0 ? 150 : 350}" y="\${index === 0 ? 150 : 170}" fill="\${color}" font-size="15" font-family="var(--font-mono)">\${zone.name}</text></g>\`;
+          return `<g><polygon points="${points}" fill="${color}" fill-opacity="0.24" stroke="${color}" stroke-width="3"></polygon><text x="${index === 0 ? 150 : 350}" y="${index === 0 ? 150 : 170}" fill="${color}" font-size="15" font-family="var(--font-mono)">${zone.name}</text></g>`;
         }
         if (zone.shape === 'Rectangle') {
-          return \`<g><rect x="120" y="275" width="150" height="110" rx="18" fill="\${color}" fill-opacity="0.22" stroke="\${color}" stroke-width="3"></rect><text x="145" y="330" fill="\${color}" font-size="15" font-family="var(--font-mono)">\${zone.name}</text></g>\`;
+          return `<g><rect x="120" y="275" width="150" height="110" rx="18" fill="${color}" fill-opacity="0.22" stroke="${color}" stroke-width="3"></rect><text x="145" y="330" fill="${color}" font-size="15" font-family="var(--font-mono)">${zone.name}</text></g>`;
         }
-        return \`<g><circle cx="500" cy="340" r="70" fill="\${color}" fill-opacity="0.22" stroke="\${color}" stroke-width="3"></circle><text x="440" y="345" fill="\${color}" font-size="15" font-family="var(--font-mono)">\${zone.name}</text></g>\`;
+        return `<g><circle cx="500" cy="340" r="70" fill="${color}" fill-opacity="0.22" stroke="${color}" stroke-width="3"></circle><text x="440" y="345" fill="${color}" font-size="15" font-family="var(--font-mono)">${zone.name}</text></g>`;
       }).join("")}
     </svg>
   `;
@@ -461,9 +461,9 @@ function renderUtilisation(fleet) {
   const idle = fleet.assets.reduce((sum, item) => sum + item.utilisation.idle, 0);
   const off = fleet.assets.reduce((sum, item) => sum + item.utilisation.off, 0);
   breakdown.innerHTML = [
-    { label: "Working", value: \`\${working.toFixed(1)}h\`, meta: "65% of active hours" },
-    { label: "Idle", value: \`\${idle.toFixed(1)}h\`, meta: "22% — AED 1,260 wasted" },
-    { label: "Engine Off", value: \`\${off.toFixed(1)}h\`, meta: "13% downtime" }
+    { label: "Working", value: `${working.toFixed(1)}h`, meta: "65% of active hours" },
+    { label: "Idle", value: `${idle.toFixed(1)}h`, meta: "22% — AED 1,260 wasted" },
+    { label: "Engine Off", value: `${off.toFixed(1)}h`, meta: "13% downtime" }
   ].map((card) => `
     <article class="summary-card">
       <div class="eyebrow">${card.label}</div>
@@ -711,7 +711,7 @@ function renderTripHistory(fleet) {
 
     // Render Route Polyline
     if (trip.route.length > 0) {
-      const pathPoints = trip.route.map((p, i) => i === 0 ? \`M\${p.x * 6.4} \${p.y * 4.8}\` : \`L\${p.x * 6.4} \${p.y * 4.8}\`).join(" ");
+      const pathPoints = trip.route.map((p, i) => i === 0 ? `M${p.x * 6.4} ${p.y * 4.8}` : `L${p.x * 6.4} ${p.y * 4.8}`).join(" ");
       mapSvg.innerHTML = `
         <rect x="0" y="0" width="640" height="480" fill="rgba(255,255,255,0.35)"></rect>
         <path d="${pathPoints}" fill="none" stroke="var(--ink)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -752,8 +752,8 @@ function renderTripHistory(fleet) {
       const rect = scrubberTrack.getBoundingClientRect();
       let percent = (e.clientX - rect.left) / rect.width;
       percent = Math.max(0, Math.min(1, percent));
-      scrubberFill.style.width = \`\${percent * 100}%\`;
-      scrubberHandle.style.left = \`\${percent * 100}%\`;
+      scrubberFill.style.width = `${percent * 100}%`;
+      scrubberHandle.style.left = `${percent * 100}%`;
       
       const trip = fleet.assets.find(a => a.id === select.value)?.trips?.[0];
       if (trip) {
@@ -761,7 +761,7 @@ function renderTripHistory(fleet) {
         const start = parseInt(trip.startTime.replace(':',''));
         const end = parseInt(trip.endTime.replace(':',''));
         const current = start + (end - start) * percent;
-        timeDisplay.textContent = \`\${Math.floor(current/100).toString().padStart(2, '0')}:\${Math.floor(current%100).toString().padStart(2, '0')}\`;
+        timeDisplay.textContent = `${Math.floor(current/100).toString().padStart(2, '0')}:${Math.floor(current%100).toString().padStart(2, '0')}`;
         
         // move play marker
         if (trip.route && trip.route.length > 0) {
@@ -772,7 +772,7 @@ function renderTripHistory(fleet) {
             playMarker.style.left = pt.x + '%';
             playMarker.style.top = pt.y + '%';
           } else {
-            mapMarkers.innerHTML += \`<div id="play-marker" class="map-marker" style="left: \${pt.x}%; top: \${pt.y}%; z-index: 10;"><span class="dot" style="background: var(--ink); transform: scale(1.5);"></span></div>\`;
+            mapMarkers.innerHTML += `<div id="play-marker" class="map-marker" style="left: ${pt.x}%; top: ${pt.y}%; z-index: 10;"><span class="dot" style="background: var(--ink); transform: scale(1.5);"></span></div>`;
           }
         }
       }
