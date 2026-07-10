@@ -91,10 +91,12 @@ function renderFleetMap(fleet) {
   ];
 
   summary.innerHTML = summaryCards.map((card) => `
-    <article class="stat-card clickable" data-filter="${card.id}">
-      <div class="eyebrow">${card.label}</div>
+    <article class="stat-card clickable" data-filter="${card.id}" style="display: flex; flex-direction: column; gap: 4px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <div class="eyebrow">${card.label}</div>
+        <span style="font-size: 10px; color: var(--slate);">${card.meta}</span>
+      </div>
       <strong>${card.value}</strong>
-      <span>${card.meta}</span>
     </article>
   `).join("");
 
@@ -249,12 +251,9 @@ function renderDetail(target, asset) {
       <div class="mini"><span>Engine Load</span><strong>${asset.engineLoad}%</strong></div>
     </div>
     ${canHtml}
-    <div class="panel" style="margin-top: 16px;">
-      <div class="panel-body">
-        <div class="eyebrow">Fuel status</div>
-        <p><strong>${asset.fuelLevel}%</strong> of tank remaining · ${asset.fuelCapacity}L capacity</p>
-      </div>
-    </div>
+    <div class="divider" style="margin-top: 16px; margin-bottom: 12px; border-top: 1px solid var(--line);"></div>
+    <div class="eyebrow" style="margin-bottom: 8px;">Fuel status</div>
+    <p><strong>${asset.fuelLevel}%</strong> of tank remaining · ${asset.fuelCapacity}L capacity</p>
     <div style="margin-top: 16px;">
       <button class="btn btn-secondary" style="width: 100%;" onclick="window.prompt('Share tracking link:', 'https://dozrfleet.vercel.app/track/${asset.id}')">
         Share tracking link
@@ -332,10 +331,12 @@ function renderMaintenance(fleet) {
     { label: "Completed This Month", value: "9", meta: "Closed out" },
     { label: "Est. Cost This Week", value: "AED 18.4k", meta: "Parts + labour" }
   ].map((card) => `
-    <article class="stat-card">
-      <div class="eyebrow">${card.label}</div>
+    <article class="stat-card" style="display: flex; flex-direction: column; gap: 4px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <div class="eyebrow">${card.label}</div>
+        <span style="font-size: 10px; color: var(--slate);">${card.meta}</span>
+      </div>
       <strong>${card.value}</strong>
-      <span>${card.meta}</span>
     </article>
   `).join("");
 
@@ -388,10 +389,12 @@ function renderGeofences(fleet) {
     { label: "After-Hours Alerts", value: "0", meta: "No violations" },
     { label: "Unauthorized", value: "0", meta: "No violations" }
   ].map((card) => `
-    <article class="stat-card">
-      <div class="eyebrow">${card.label}</div>
+    <article class="stat-card" style="display: flex; flex-direction: column; gap: 4px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <div class="eyebrow">${card.label}</div>
+        <span style="font-size: 10px; color: var(--slate);">${card.meta}</span>
+      </div>
       <strong>${card.value}</strong>
-      <span>${card.meta}</span>
     </article>
   `).join("");
 
@@ -450,10 +453,12 @@ function renderUtilisation(fleet) {
     { label: "Total Engine Hrs", value: "18.6h", meta: "Active fleet today" },
     { label: "Deadhead Est.", value: "38%", meta: "Trucks returning empty" }
   ].map((card) => `
-    <article class="stat-card">
-      <div class="eyebrow">${card.label}</div>
+    <article class="stat-card" style="display: flex; flex-direction: column; gap: 4px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <div class="eyebrow">${card.label}</div>
+        <span style="font-size: 10px; color: var(--slate);">${card.meta}</span>
+      </div>
       <strong>${card.value}</strong>
-      <span>${card.meta}</span>
     </article>
   `).join("");
 
@@ -465,10 +470,12 @@ function renderUtilisation(fleet) {
     { label: "Idle", value: `${idle.toFixed(1)}h`, meta: "22% — AED 1,260 wasted" },
     { label: "Engine Off", value: `${off.toFixed(1)}h`, meta: "13% downtime" }
   ].map((card) => `
-    <article class="summary-card">
-      <div class="eyebrow">${card.label}</div>
+    <article class="summary-card" style="display: flex; flex-direction: column; gap: 4px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <div class="eyebrow">${card.label}</div>
+        <span style="font-size: 10px; color: var(--slate);">${card.meta}</span>
+      </div>
       <strong>${card.value}</strong>
-      <span>${card.meta}</span>
     </article>
   `).join("");
 
@@ -507,10 +514,12 @@ function renderCostRoi(fleet) {
     { label: "ROI Multiple", value: "3.2x", meta: "Against pilot budget" },
     { label: "Year-End Forecast", value: "AED 84k", meta: "By Dec 2026" }
   ].map((card) => `
-    <article class="stat-card">
-      <div class="eyebrow">${card.label}</div>
+    <article class="stat-card" style="display: flex; flex-direction: column; gap: 4px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <div class="eyebrow">${card.label}</div>
+        <span style="font-size: 10px; color: var(--slate);">${card.meta}</span>
+      </div>
       <strong>${card.value}</strong>
-      <span>${card.meta}</span>
     </article>
   `).join("");
 
@@ -559,10 +568,12 @@ function renderReports(fleet) {
     { label: "Next Scheduled", value: "08:00", meta: "Tomorrow" },
     { label: "Formats Available", value: "PDF + CSV", meta: "WhatsApp + Email" }
   ].map((card) => `
-    <article class="stat-card">
-      <div class="eyebrow">${card.label}</div>
+    <article class="stat-card" style="display: flex; flex-direction: column; gap: 4px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <div class="eyebrow">${card.label}</div>
+        <span style="font-size: 10px; color: var(--slate);">${card.meta}</span>
+      </div>
       <strong>${card.value}</strong>
-      <span>${card.meta}</span>
     </article>
   `).join("");
 
