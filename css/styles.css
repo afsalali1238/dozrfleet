@@ -10,6 +10,7 @@
   --green: #146447;
   --green-tint: #E7F6EF;
   --error: #A22424;
+  --error-tint: #FDEDED;
   --font-heading: 'Space Grotesk', system-ui, sans-serif;
   --font-body: 'Hanken Grotesk', system-ui, sans-serif;
   --font-mono: 'Space Mono', monospace;
@@ -130,7 +131,7 @@ main { padding: 24px 0 48px; }
 .bar-fill { height: 100%; border-radius: inherit; }
 .status-chip[data-status="operating"], .status-chip[data-status="ok"], .status-chip[data-status="on schedule"], .status-chip[data-status="good"] { background: var(--green-tint); color: var(--green); }
 .status-chip[data-status="idle"], .status-chip[data-status="warn"], .status-chip[data-status="due soon"], .status-chip[data-status="watch"] { background: var(--yellow-tint); color: var(--ink); }
-.status-chip[data-status="offline"], .status-chip[data-status="critical"], .status-chip[data-status="overdue"], .status-chip[data-status="error"] { background: #FDEDED; color: var(--error); }
+.status-chip[data-status="offline"], .status-chip[data-status="critical"], .status-chip[data-status="overdue"], .status-chip[data-status="error"] { background: var(--error-tint); color: var(--error); }
 
 .map-card { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 20px; }
 .map-surface { position: relative; min-height: 480px; background: linear-gradient(135deg, rgba(255, 196, 0, 0.15), rgba(20, 21, 24, 0.05)); border-radius: var(--radius-card); overflow: hidden; border: 1px solid var(--line); }

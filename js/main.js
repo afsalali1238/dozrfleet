@@ -256,7 +256,7 @@ function renderDetail(target, asset) {
       </div>
     </div>
     <div style="margin-top: 16px;">
-      <button class="btn btn-secondary" style="width: 100%;" onclick="window.prompt('Share tracking link:', 'https://dozr-fleet.vercel.app/track/${asset.id}')">
+      <button class="btn btn-secondary" style="width: 100%;" onclick="window.prompt('Share tracking link:', 'https://dozrfleet.vercel.app/track/${asset.id}')">
         Share tracking link
       </button>
     </div>
@@ -746,40 +746,82 @@ function renderTripHistory(fleet) {
   loadTrip();
 
   // Basic scrubber logic
-  if(scrubberTrack) {
+  let playTimer = null;
+  const playBtn = document.getElementById("trip-play-btn");
+
+  const stopPlayback = () => {
+    if (playTimer) {
+      clearInterval(playTimer);
+      playTimer = null;
+    }
+    if (playBtn) playBtn.textContent = "Play";
+  };
+
+  const setScrubberPercent = (percent) => {
+    percent = Math.max(0, Math.min(1, percent));
+    scrubberFill.style.width = `${percent * 100}%`;
+    scrubberHandle.style.left = `${percent * 100}%`;
+
+    const trip = fleet.assets.find(a => a.id === select.value)?.trips?.[0];
+    if (trip) {
+      // mock time interpolation
+      const start = parseInt(trip.startTime.replace(':',''));
+      const end = parseInt(trip.endTime.replace(':',''));
+      const current = start + (end - start) * percent;
+      timeDisplay.textContent = `${Math.floor(current/100).toString().padStart(2, '0')}:${Math.floor(current%100).toString().padStart(2, '0')}`;
+
+      // move play marker
+      if (trip.route && trip.route.length > 0) {
+        const pointIndex = Math.min(trip.route.length - 1, Math.floor(percent * trip.route.length));
+        const pt = trip.route[pointIndex];
+        const playMarker = document.getElementById('play-marker');
+        if (playMarker) {
+          playMarker.style.left = pt.x + '%';
+          playMarker.style.top = pt.y + '%';
+        } else if (mapMarkers) {
+          mapMarkers.innerHTML += `<div id="play-marker" class="map-marker" style="left: ${pt.x}%; top: ${pt.y}%; z-index: 10;"><span class="dot" style="background: var(--ink); transform: scale(1.5);"></span></div>`;
+        }
+      }
+    }
+    return percent;
+  };
+
+  if (scrubberTrack) {
     let isDragging = false;
     const updateScrubber = (e) => {
       const rect = scrubberTrack.getBoundingClientRect();
-      let percent = (e.clientX - rect.left) / rect.width;
-      percent = Math.max(0, Math.min(1, percent));
-      scrubberFill.style.width = `${percent * 100}%`;
-      scrubberHandle.style.left = `${percent * 100}%`;
-      
-      const trip = fleet.assets.find(a => a.id === select.value)?.trips?.[0];
-      if (trip) {
-        // mock time interpolation
-        const start = parseInt(trip.startTime.replace(':',''));
-        const end = parseInt(trip.endTime.replace(':',''));
-        const current = start + (end - start) * percent;
-        timeDisplay.textContent = `${Math.floor(current/100).toString().padStart(2, '0')}:${Math.floor(current%100).toString().padStart(2, '0')}`;
-        
-        // move play marker
-        if (trip.route && trip.route.length > 0) {
-          const pointIndex = Math.min(trip.route.length - 1, Math.floor(percent * trip.route.length));
-          const pt = trip.route[pointIndex];
-          const playMarker = document.getElementById('play-marker');
-          if (playMarker) {
-            playMarker.style.left = pt.x + '%';
-            playMarker.style.top = pt.y + '%';
-          } else {
-            mapMarkers.innerHTML += `<div id="play-marker" class="map-marker" style="left: ${pt.x}%; top: ${pt.y}%; z-index: 10;"><span class="dot" style="background: var(--ink); transform: scale(1.5);"></span></div>`;
-          }
-        }
-      }
+      setScrubberPercent((e.clientX - rect.left) / rect.width);
     };
 
-    scrubberTrack.addEventListener("mousedown", (e) => { isDragging = true; updateScrubber(e); });
+    scrubberTrack.addEventListener("mousedown", (e) => { stopPlayback(); isDragging = true; updateScrubber(e); });
     document.addEventListener("mousemove", (e) => { if(isDragging) updateScrubber(e); });
     document.addEventListener("mouseup", () => { isDragging = false; });
   }
+
+  if (playBtn) {
+    playBtn.addEventListener("click", () => {
+      if (playTimer) {
+        stopPlayback();
+        return;
+      }
+      const trip = fleet.assets.find(a => a.id === select.value)?.trips?.[0];
+      if (!trip) return;
+
+      const currentWidth = parseFloat(scrubberFill.style.width) || 0;
+      let percent = currentWidth >= 100 ? 0 : currentWidth / 100;
+      playBtn.textContent = "Pause";
+      playTimer = setInterval(() => {
+        percent += 0.01;
+        if (percent >= 1) {
+          setScrubberPercent(1);
+          stopPlayback();
+          return;
+        }
+        setScrubberPercent(percent);
+      }, 80);
+    });
+  }
+
+  // Stop any running playback when switching vehicles/dates
+  select.addEventListener("change", stopPlayback);
 }
